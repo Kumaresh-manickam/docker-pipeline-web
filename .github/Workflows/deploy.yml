@@ -1,0 +1,34 @@
+name: Deploy Docker Web App
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Copy files to Ubuntu VM via SSH
+      uses: appleboy/scp-action@master
+      with:
+        host: '192.168.56.101'
+        username: 'devopsvm'
+        password: ${{ secrets.VM_PASSWORD }}
+        source: "Dockerfile,src/"
+        target: "~/docker-build"
+
+    - name: Build and Run Docker Container
+      uses: appleboy/ssh-action@master
+      with:
+        host: '192.168.56.101'
+        username: 'devopsvm'
+        password: ${{ secrets.VM_PASSWORD }}
+        script: |
+          cd ~/docker-build
+          docker build -t my-docker-web:latest .
+          docker stop live-web-container || true
+          docker rm live-web-container || true
+          docker run -d --name live-web-container -p 80:80 my-docker-web:latest
