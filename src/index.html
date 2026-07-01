@@ -1,17 +1,60 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Containerized Production System</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Welcome Portal</title>
     <style>
-        body { font-family: sans-serif; background: #f4f6f9; padding: 50px; text-align: center; }
-        .card { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); display: inline-block; }
-        h1 { color: #2563eb; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+        .welcome-card {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+        }
+        h1 {
+            color: #4a5568;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+        p {
+            color: #718096;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        .badge {
+            display: inline-block;
+            background-color: #e2e8f0;
+            color: #4a5568;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
-    <div class="card">
-        <h1>Docker Lifecycle Active!</h1>
-        <p>This deployment was triggered by Git, built into a container, and delivered via GitHub Actions.</p>
+
+    <div class="welcome-card">
+        <h1>Welcome Team! 👋</h1>
+        <p>Great to have you here. This application deployment environment is fully connected and managing production assets seamlessly.</p>
+        <p>Let's build something incredible together today.</p>
+        <div class="badge">Pipeline Deployment Verified</div>
     </div>
+
 </body>
 </html>
