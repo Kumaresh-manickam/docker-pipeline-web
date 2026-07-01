@@ -12,8 +12,9 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v4
 
-    - name: Quick Docker Test
+    - name: Build and Run Container
       run: |
-        docker printf "Testing Docker Connection...\n"
+        docker stop live-web-container || true
+        docker rm -f live-web-container || true
         docker build -t my-docker-web:latest .
-        docker run -d -p 8080:80 my-docker-web:latest
+        docker run -d --name live-web-container -p 80:80 my-docker-web:latest
