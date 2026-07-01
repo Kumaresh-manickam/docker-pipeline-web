@@ -17,4 +17,4 @@ jobs:
         docker stop live-web-container || true
         docker rm -f live-web-container || true
         docker build -t my-docker-web:latest .
-        docker run -d --name live-web-container -p 80:80 my-docker-web:latest
+        docker run -d --name live-web-container -p 8080:80 my-docker-web:latest
