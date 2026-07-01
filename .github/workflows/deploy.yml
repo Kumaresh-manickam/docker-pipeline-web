@@ -12,18 +12,8 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v4
 
-    - name: Build and Run Docker Container Locally
+    - name: Quick Docker Test
       run: |
-        mkdir -p ~/docker-build
-        cp -r * ~/docker-build/
-        cd ~/docker-build
-        
-        # Build the image safely
+        docker printf "Testing Docker Connection...\n"
         docker build -t my-docker-web:latest .
-        
-        # Stop and remove existing container if it exists, without crashing if it doesn't
-        docker stop live-web-container || true
-        docker rm -f live-web-container || true
-        
-        # Run the new container cleanly
-        docker run -d --name live-web-container -p 80:80 my-docker-web:latest
+        docker run -d -p 8080:80 my-docker-web:latest
