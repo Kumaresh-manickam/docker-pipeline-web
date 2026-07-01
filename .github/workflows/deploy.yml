@@ -3,6 +3,7 @@ name: Deploy Docker Web App
 on:
   push:
     branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -16,7 +17,13 @@ jobs:
         mkdir -p ~/docker-build
         cp -r * ~/docker-build/
         cd ~/docker-build
+        
+        # Build the image safely
         docker build -t my-docker-web:latest .
+        
+        # Stop and remove existing container if it exists, without crashing if it doesn't
         docker stop live-web-container || true
-        docker rm live-web-container || true
+        docker rm -f live-web-container || true
+        
+        # Run the new container cleanly
         docker run -d --name live-web-container -p 80:80 my-docker-web:latest
